@@ -1,0 +1,102 @@
+*{
+    margin: 0;
+    box-sizing: border-box;
+}
+
+
+.container{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 1px;
+}
+
+.info{
+width: 100%;
+
+border-radius: 5px 5px 5px 5px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    background-image: radial-gradient(circle 248px at center,
+            #16d9e3 0%, #30c7ec 47%,
+            #46aef7 100%);
+            margin-bottom: 10px;
+}
+
+.pic {
+    height: 100px;
+        width: 100px;
+        background-color: red;
+        margin: 30px 50px 30px 30px;
+        border-radius: 50%;
+        object-fit: cover;
+}
+
+.name{
+    font-size: 1.3rem;
+    font-weight: bold;
+}
+
+
+.containerPost {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 1px;
+}
+.content {
+    display: flex;
+    flex-direction: row;
+    
+    background-image: linear-gradient(-20deg, #e4dcdd 0%,
+                #e2dad4 100%);
+    border-radius: 5px;
+    margin: 5px 0px;       
+}
+
+.img {
+    flex: 0 0 30%;
+    object-fit: cover;
+    margin: 4px 10px 4px 0px ;
+}
+
+.image{
+    
+    object-fit: fill;
+    margin: 5px;
+}
+
+.text{
+    flex: 1 1 70%;
+    object-fit: cover;
+    margin: 4px 10px 4px 0px;
+    align-content: space-between;
+}
+.button{
+    display: flex;
+    flex-direction: row;
+    
+}
+.clicks{
+    flex: 1 1 60%;
+display: flex;
+    flex-direction: row;
+}
+.click {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+
+}
+.cl {
+    margin: 0px 5px;
+}
+.cli {
+    margin: 0px 35px;
+}
+
+
