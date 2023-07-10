@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Post from "./Post";
-import styles from "./post.module.css";
+import Loading from "../../components/loading";
 
 const IndexPage = () => {
   const [posts, setPost] = useState([]);
@@ -20,13 +20,7 @@ const IndexPage = () => {
   return (
     <div className=".indexPage">
       {loading ? (
-        <section className={styles.dots_container}>
-          <div className={styles.dot}></div>
-          <div className={styles.dot}></div>
-          <div className={styles.dot}></div>
-          <div className={styles.dot}></div>
-          <div className={styles.dot}></div>
-        </section>
+        <Loading/>
       ) : (
         <Post post={posts} />
       )}

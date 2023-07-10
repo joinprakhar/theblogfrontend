@@ -5,12 +5,14 @@ import { UserContext } from "../../context/userContext";
 import { Link } from "react-router-dom";
 import styles from "./postpage.module.css";
 import Post from "./Post";
+import Loading from "../../components/loading";
 
 export default function PostPage() {
   const { id } = useParams();
   const [postInfo, setPostInfo] = useState(null);
   const { userInfo} = useContext(UserContext);
   const [redirect, setRedirect] = useState(false);
+  const [loading, setShowLoading] = useState(true);
 
     const [posts, setPost] = useState([]);
     useEffect(() => {
@@ -27,6 +29,7 @@ export default function PostPage() {
     ).then((response) => {
       response.json().then((postInfo) => {
         setPostInfo(postInfo);
+        setShowLoading(false)
       });
     });
   }, []); 
@@ -58,22 +61,27 @@ export default function PostPage() {
     <div className="post-page">
       <h2>{postInfo.title}</h2>
       <article className={styles.container}>
-        <div className={styles.postpart}>
-          <div className="image">
-            {!postInfo.image ? (
-              <img
-                src="https://t4.ftcdn.net/jpg/04/73/25/49/360_F_473254957_bxG9yf4ly7OBO5I0O5KABlN930GwaMQz.jpg"
-                alt=""
-              />
-            ) : (
-              <img src={postInfo.image} alt="" />
-            )}
+        {loading ? (
+          <Loading />
+        ) : (
+          <div className={styles.postpart}>
+            <div className="image">
+              {!postInfo.image ? (
+                <img
+                  src="https://t4.ftcdn.net/jpg/04/73/25/49/360_F_473254957_bxG9yf4ly7OBO5I0O5KABlN930GwaMQz.jpg"
+                  alt=""
+                />
+              ) : (
+                <img src={postInfo.image} alt="" />
+              )}
+            </div>
+            <div
+              className="content"
+              dangerouslySetInnerHTML={{ __html: postInfo.content }}
+            />
           </div>
-          <div
-            className="content"
-            dangerouslySetInnerHTML={{ __html: postInfo.content }}
-          />
-        </div>
+        )}
+
         <div className={styles.detailpart}>
           <div className="author">
             <Link to={`/profile/${postInfo?.author?._id}`}>
@@ -123,10 +131,13 @@ export default function PostPage() {
             </div>
           )}
           <p>Related Post</p>
-          <div className={styles.related}>
-            
-            <Post post={posts} />
-          </div>
+          {loading ? (
+            <Loading />
+          ) : (
+            <div className={styles.related}>
+              <Post post={posts} />
+            </div>
+          )}
         </div>
       </article>
     </div>
