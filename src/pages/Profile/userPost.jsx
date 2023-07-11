@@ -26,7 +26,7 @@ const UserPost = ({ post}) => {
             </div>
           </div>
           <h3>{title}</h3>
-          <p>{summary}</p>
+          <p className={styles.summary}>{summary}</p>
         </div>
       </div>
     </div>

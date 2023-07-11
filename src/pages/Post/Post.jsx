@@ -6,7 +6,7 @@ export default function Post({ post }) {
   
   return (
     <div className={styles.post}>
-      {post.length > 0 &&
+      {post.length > 0 && 
         post.map((post) => {
           const { _id, title, summary, createdAt, image, category } =
             post;
@@ -31,7 +31,7 @@ export default function Post({ post }) {
                   </div>
                   <div className={styles.texts}>
                     <Link to={`/post/${_id}`}>
-                      <h4 className="card__title">{title}</h4>
+                      <h2 className="card_title">{title}</h2>
                     </Link>
                   </div>
                   <div className={styles.tags}>
@@ -40,7 +40,7 @@ export default function Post({ post }) {
                     </div>
                     <div>
                       <time className={styles.date}>
-                        {formatISO9075(new Date(createdAt))}
+                        <a> {formatISO9075(new Date(createdAt))}</a>
                       </time>
                     </div>
                   </div>

@@ -2,15 +2,15 @@ import { useContext, useEffect, useState } from "react";
 import { Navigate, useParams } from "react-router-dom";
 import Editor from "./Editor";
 import { UserContext } from "../../context/userContext";
+import { useCookies } from "react-cookie";
 
 export default function EditPost() {
   const { userInfo } = useContext(UserContext);
-  console.log(userInfo.id);
+  const [cookies, _] = useCookies(["access_token"]);
   const { id } = useParams();
   const [title, setTitle] = useState("");
   const [summary, setSummary] = useState("");
   const [content, setContent] = useState("");
- // const [files, setFiles] = useState("");
   const [image, setImage] = useState("");
 
   const [redirect, setRedirect] = useState(false);
@@ -36,22 +36,20 @@ export default function EditPost() {
     data.set("content", content);
     data.set("image", image);
     data.set("id", id);
-    data.set("userId", userInfo.id);
-    // if (files?.[0]) {
-    //   data.set("file", files?.[0]);
-    // }
+    data.set("userId", cookies.access_token.id);
     const response = await fetch(
       "https://blogbackend-e8fr.onrender.com/post/",
       {
         method: "PUT",
         body: data,
-        credentials: "include",
+        headers: { authorization: cookies.access_token.token },
       }
     );
     if (response.ok) {
       setRedirect(true);
     }
   }
+  console.log(cookies.access_token.id);
 
   if (redirect) {
     return <Navigate to={"/post/" + id} />;

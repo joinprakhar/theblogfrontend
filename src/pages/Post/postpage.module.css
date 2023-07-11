@@ -5,13 +5,31 @@
 
 .container{
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
 }
 .postpart{
-    width: 70%;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+.title{
+    font-size: 100px;
+}
+.image{
+    width: 80%;
+    display: flex;
+    overflow: hidden;
+    height: 250px;
+}
+img{
+    object-fit: cover;
+    object-position: center center;
+    width: 100%;
 }
 .detailpart{
     width: 25%;
+    font-size: large;
 }
 
 .button {
@@ -34,16 +52,129 @@ background-color: #333;
     border-radius: 5px;
     width: 90%;
 }
-text{
+.text{
     color: #fff;
 }
 svg {
     color: #fff;
 }
 .related{
-    width: 100%;
+    
     margin:  10px  10%;
 }
-p{
+.p{
     text-align: center;
+}
+.cont {
+    flex-basis: 125%;
+}
+.content{
+    flex-basis: 90%;
+    margin: 4% 0;
+}
+
+.relatedPost{
+    flex-basis: 40%;
+}
+
+.comment{
+    margin: 10% 0;
+}
+
+@media screen and (max-width: 700px) {
+    .container {
+        display: flex;
+        flex-direction: column;
+        margin: 0 3%;
+    }
+
+    .postpart {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .image {
+        width: 100%;
+        display: flex;
+        overflow: hidden;
+        height: 250px;
+    }
+
+    img {
+        object-fit: cover;
+        object-position: center center;
+        width: 100%;
+        
+    }
+
+    .detailpart {
+        width: 25%;
+        margin: auto;
+    }
+    .block{
+        display: block;
+    }
+
+    .button {
+        display: block;
+        display: flex;
+        flex-direction: column;
+       width: 100%;
+    }
+
+    .btn {
+        
+        margin: 10px -60px;
+        width: 210px;
+        background-color: #333;
+        align-items: center;
+        text-decoration: none;
+        color: #fff;
+        border-radius: 5px;
+        
+    }
+
+    .text {
+        color: #fff;
+    }
+
+    svg {
+        color: #fff;
+    }
+
+    .related {
+
+        margin: 10px 10%;
+    }
+
+    .p {
+        text-align: center;
+    }
+
+    .cont {
+        flex-basis: 125%;
+    }
+
+    .content {
+        flex-basis: 90%;
+        margin: 4% 0;
+    }
+
+    .relatedPost {
+        flex-basis: 40%;
+    }
+
+    .comment {
+        margin: 10% 0;
+    }
+
+    h1{
+        font-size: 1.2rem;
+    }
+    a{
+        width: 300px;
+        font-size: 0.8rem;
+    }
+    
 }

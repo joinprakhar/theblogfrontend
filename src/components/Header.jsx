@@ -1,83 +1,107 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import { UserContext } from "../context/userContext.jsx";
+import { NavLink, Link } from "react-router-dom";
+import styles from "./Header.module.css";
+import { useCookies } from "react-cookie";
+
+
+import { GiHamburgerMenu } from "react-icons/gi";
 
 const Header = () => {
-  const { userInfo, setUserInfo } = useContext(UserContext);
-  const [ first, setFirst] = useState(true)
-  function profile() {
-    fetch(
-      "https://blogbackend-e8fr.onrender.com/profile",
-      {
-        credentials: "include",
-      }
-    ).then((response) => {
-      response.json().then((userInfo) => {
-        setUserInfo(userInfo);
-        setFirst(false);
-      });
-    });
-  }
-    function profileAgain() {
-      const data = new FormData();
-      data.set("token", userInfo.token);
-      fetch("https://blogbackend-e8fr.onrender.com/profile", {
-        method: "POST",
-        body: data,
-        credentials: "include",
-      }).then((response) => {
-        response.json().then((userInfo) => {
-          setUserInfo(userInfo);
-        });
-      });
-    }
-
-  useEffect(() => {
-    if(first){
-      profile()
-    }else {
-      profileAgain();
-    }
-   
-    
-  }, []);
-console.log(userInfo);
-
+  const [cookies, setCookies] = useCookies(["access_token"]);
+  const [showMediaIcons, setShowMediaIcons] = useState(false);
 
   function logout() {
-    setUserInfo(null);
-    fetch("https://blogbackend-e8fr.onrender.com/logout", {
-      credentials: "include",
-      method: "POST",
-    });
+    setCookies("access_token", "");
+    window.localStorage.clear();
   }
 
   return (
-    <div>
-      <header>
-        <Link to="/" className="logo">
-          The Post
+    <nav className="main-nav">
+      {/* 1st logo part  */}
+      <div className="logo">
+        <Link to="/">
+          <h2 className="logoss">
+            <span>T</span>he
+            <span> P</span>ost
+          </h2>
         </Link>
-        <nav>
-          {userInfo && (
-            <>
-              <Link to="/create">Create new post</Link>
-              <Link to={`/profile/${userInfo?.id}`}>{userInfo?.Name}</Link>
-              <a href="/" onClick={logout}>
+      </div>
+
+      {/* 2nd menu part  */}
+      <div
+        className={showMediaIcons ? "menu-link mobile-menu-link" : "menu-link"}
+      >
+        <ul className="lili">
+          {cookies.access_token && (
+            <li>
+              <NavLink to="/create">Create new post</NavLink>
+            </li>
+          )}
+          {cookies.access_token && (
+            <li>
+              <NavLink to={`/profile/${cookies.access_token.id}`}>
+                {cookies?.access_token?.Name}
+              </NavLink>
+            </li>
+          )}
+          {cookies.access_token && (
+            <li>
+              <NavLink to="/" onClick={logout}>
                 Logout
-              </a>
-            </>
+              </NavLink>
+            </li>
           )}
-          {!userInfo && (
-            <>
+          {!cookies.access_token && (
+            <li>
               <Link to="/login">Login</Link>
-              <Link to="/register">Register</Link>
-            </>
+            </li>
           )}
-        </nav>
-      </header>
-    </div>
+          {!cookies.access_token && (
+            <li>
+              <Link to="/register">Register</Link>
+            </li>
+          )}
+          <li>
+            <NavLink to="/contact">contact</NavLink>
+          </li>
+        </ul>
+      </div>
+
+      {/* 3rd social media links */}
+      <div className="social-media">
+        {/* hamburget menu start  */}
+        <div className="hamburger-menu">
+          <a href="#" onClick={() => setShowMediaIcons(!showMediaIcons)}>
+            <GiHamburgerMenu />
+          </a>
+        </div>
+      </div>
+    </nav>
   );
 };
 
 export default Header;
+/* <header>
+  <Link to="/" className="logo">
+    The Post
+  </Link>
+  <nav>
+    {cookies.access_token && (
+      <>
+        <Link to="/create">Create new post</Link>
+        <Link to={`/profile/${cookies.access_token.id}`}>
+          {cookies?.access_token?.Name}
+        </Link>
+        <a href="/" onClick={logout}>
+          Logout
+        </a>
+      </>
+    )}
+    {!cookies.access_token && (
+      <>
+        <Link to="/login">Login</Link>
+        <Link to="/register">Register</Link>
+      </>
+    )}
+  </nav>
+</header>; */
