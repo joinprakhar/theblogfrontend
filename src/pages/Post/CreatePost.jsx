@@ -2,17 +2,17 @@ import React, { useContext, useState } from "react";
 import "react-quill/dist/quill.snow.css";
 import Editor from './Editor';
 import { Navigate } from "react-router-dom";
-import { UserContext } from "../../context/userContext";
+
+import { useCookies } from "react-cookie";
 
 
 export default function CreatePost() {
-    const { userInfo} = useContext(UserContext);
-    console.log(userInfo);
+  const [cookies, _] = useCookies(["access_token"]);
+    
 
   const [title, setTitle] = useState("");
   const [summary, setSummary] = useState("");
   const [content, setContent] = useState("");
-  //const [files, setFiles] = useState("");
   const [image, setImage] = useState("");
   const [type, setType] = useState("");
   const [redirect, setRedirect] = useState(false);
@@ -27,15 +27,14 @@ export default function CreatePost() {
       data.set("content", content);
       data.set("image", image);
       data.set("category", type);
-     //data.set("file", files[0]);
-      data.set("email", userInfo.email);
+      data.set("email", cookies.access_token.email);
       ev.preventDefault();
       const response = await fetch(
         "https://blogbackend-e8fr.onrender.com/post",
         {
           method: "POST",
           body: data,
-          credentials: "include",
+          headers: { authorization: cookies.access_token.token },
         }
       );
       if (response.ok) {

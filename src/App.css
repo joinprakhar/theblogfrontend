@@ -158,6 +158,7 @@ div.post-page div.author {
 
 div.post-page div.content p {
   line-height: 1.6rem;
+  text-align: justify;
 }
 
 div.edit-row {
@@ -182,5 +183,8 @@ a svg {
 
 .indexPage {
   margin: auto;
+}
+p {
+  text-align: justify;
 }
 

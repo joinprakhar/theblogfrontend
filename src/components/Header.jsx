@@ -1,57 +1,25 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { UserContext } from "../context/userContext.jsx";
+import { useCookies } from "react-cookie";
 
 const Header = () => {
-  const { userInfo, setUserInfo } = useContext(UserContext);
-  const [ first, setFirst] = useState(true)
-  function profile() {
-    fetch(
-      "https://blogbackend-e8fr.onrender.com/profile",
-      {
-        credentials: "include",
-      }
-    ).then((response) => {
-      response.json().then((userInfo) => {
-        setUserInfo(userInfo);
-        setFirst(false);
-      });
-    });
-  }
-    function profileAgain() {
-      const data = new FormData();
-      data.set("token", userInfo.token);
-      fetch("https://blogbackend-e8fr.onrender.com/profile", {
-        method: "POST",
-        body: data,
-        credentials: "include",
-      }).then((response) => {
-        response.json().then((userInfo) => {
-          setUserInfo(userInfo);
-        });
-      });
-    }
+  const [cookies, setCookies] = useCookies(["access_token"]);
 
-  useEffect(() => {
-    if(first){
-      profile()
-    }else {
-      profileAgain();
-    }
    
-    
-  }, []);
-console.log(userInfo);
+
+  // useEffect(() => {
+  //     profile()    
+  // }, []);
 
 
   function logout() {
-    setUserInfo(null);
-    fetch("https://blogbackend-e8fr.onrender.com/logout", {
-      credentials: "include",
-      method: "POST",
-    });
-  }
+    
+    setCookies("access_token", "");
+    window.localStorage.clear();
 
+  }
+//console.log(cookies?.access_token);
   return (
     <div>
       <header>
@@ -59,16 +27,18 @@ console.log(userInfo);
           The Post
         </Link>
         <nav>
-          {userInfo && (
+          {cookies.access_token && (
             <>
               <Link to="/create">Create new post</Link>
-              <Link to={`/profile/${userInfo?.id}`}>{userInfo?.Name}</Link>
+              <Link to={`/profile/${cookies.access_token.id}`}>
+                {cookies?.access_token?.Name}
+              </Link>
               <a href="/" onClick={logout}>
                 Logout
               </a>
             </>
           )}
-          {!userInfo && (
+          {!cookies.access_token && (
             <>
               <Link to="/login">Login</Link>
               <Link to="/register">Register</Link>
