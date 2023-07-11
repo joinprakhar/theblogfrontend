@@ -32,7 +32,7 @@
 
 .comment p{
     text-align: left;
-<<<<<<< HEAD
+
 }
 
 @media screen and (max-width: 700px) {
@@ -63,6 +63,5 @@
             border-radius: 50%;
             object-fit: cover;
         }
-=======
->>>>>>> 4cf1630beca0304a65f208936072eeea2c082329
+
 }
