@@ -12,10 +12,13 @@
     flex-direction: row;
     width: 100%;
 }
+<<<<<<< HEAD
 
 .title{
     font-size: 100px;
 }
+=======
+>>>>>>> 4cf1630beca0304a65f208936072eeea2c082329
 .image{
     width: 80%;
     display: flex;
@@ -79,6 +82,7 @@ svg {
 
 .comment{
     margin: 10% 0;
+<<<<<<< HEAD
 }
 
 @media screen and (max-width: 700px) {
@@ -177,4 +181,3 @@ svg {
         font-size: 0.8rem;
     }
     
-}
