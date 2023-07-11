@@ -1,10 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
-<<<<<<< HEAD
 import { NavLink, Link } from "react-router-dom";
 import styles from "./Header.module.css";
 import { useCookies } from "react-cookie";
-
-
 import { GiHamburgerMenu } from "react-icons/gi";
 
 const Header = () => {
@@ -15,28 +12,7 @@ const Header = () => {
     setCookies("access_token", "");
     window.localStorage.clear();
   }
-=======
-import { Link } from "react-router-dom";
-import { UserContext } from "../context/userContext.jsx";
-import { useCookies } from "react-cookie";
 
-const Header = () => {
-  const [cookies, setCookies] = useCookies(["access_token"]);
-
-   
-
-  // useEffect(() => {
-  //     profile()    
-  // }, []);
-
-
-  function logout() {
-    
-    setCookies("access_token", "");
-    window.localStorage.clear();
->>>>>>> 4cf1630beca0304a65f208936072eeea2c082329
-
-  }
 //console.log(cookies?.access_token);
   return (
     <nav className="main-nav">
@@ -48,7 +24,7 @@ const Header = () => {
             <span> P</span>ost
           </h2>
         </Link>
-<<<<<<< HEAD
+
       </div>
 
       {/* 2nd menu part  */}
@@ -71,26 +47,14 @@ const Header = () => {
           {cookies.access_token && (
             <li>
               <NavLink to="/" onClick={logout}>
-=======
-        <nav>
-          {cookies.access_token && (
-            <>
-              <Link to="/create">Create new post</Link>
-              <Link to={`/profile/${cookies.access_token.id}`}>
-                {cookies?.access_token?.Name}
-              </Link>
-              <a href="/" onClick={logout}>
->>>>>>> 4cf1630beca0304a65f208936072eeea2c082329
+
                 Logout
               </NavLink>
             </li>
           )}
           {!cookies.access_token && (
-<<<<<<< HEAD
+
             <li>
-=======
-            <>
->>>>>>> 4cf1630beca0304a65f208936072eeea2c082329
               <Link to="/login">Login</Link>
             </li>
           )}
