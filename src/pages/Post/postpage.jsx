@@ -15,13 +15,10 @@ export default function PostPage() {
   const [redirect, setRedirect] = useState(false);
   const [loading, setShowLoading] = useState(true);
   const [posts, setPost] = useState([]);
-<<<<<<< HEAD
+
   let value = [id, cookies?.access_token?.Name];
   //console.log(value)
-=======
-   let value = [id, cookies.access_token.Name];
-   //console.log(value)
->>>>>>> 4cf1630beca0304a65f208936072eeea2c082329
+
   useEffect(() => {
     fetch("https://blogbackend-e8fr.onrender.com/post").then((response) => {
       response.json().then((posts) => {
@@ -61,10 +58,7 @@ export default function PostPage() {
   if (redirect) {
     return <Navigate to={"/"} />;
   }
-<<<<<<< HEAD
-=======
 
->>>>>>> 4cf1630beca0304a65f208936072eeea2c082329
 
   return (
     <div className="post-page">
@@ -86,7 +80,7 @@ export default function PostPage() {
               )}
             </div>
             <div className={styles.detailpart}>
-<<<<<<< HEAD
+
               <div >
                 <Link to={`/profile/${postInfo?.author?._id}`}>
                   <a>
@@ -140,7 +134,7 @@ export default function PostPage() {
                   </div>
                 )}
               </div>
-=======
+
               <div className="author">
                 <Link to={`/profile/${postInfo?.author?._id}`}>
                   Author :{" "}
@@ -188,7 +182,6 @@ export default function PostPage() {
                   </Link>
                 </div>
               )}
->>>>>>> 4cf1630beca0304a65f208936072eeea2c082329
             </div>
           </div>
         )}
