@@ -31,28 +31,6 @@ const Login = () => {
   };
     
 
-  // async function login(ev) {
-  //   ev.preventDefault();
-  //   const response = await fetch(
-  //     "https://blogbackend-e8fr.onrender.com/login",
-  //     {
-  //       method: "POST",
-  //       body: JSON.stringify({ email, password }),
-  //       headers: { "Content-Type": "application/json" },
-  //       credentials: "include",
-  //     }
-  //   );
-  //   if (response.ok) {
-  //     await response.json().then((userInfo) => {
-  //       setUserInfo(userInfo);
-  //       setRedirect(true);
-  //       console.log(userInfo);
-  //     });
-  //   } else {
-  //     alert("wrong credentials");
-  //   }
-  // }
-
   if (redirect) {
     return <Navigate to={"/"} />;
   }

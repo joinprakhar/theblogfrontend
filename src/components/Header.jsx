@@ -20,8 +20,10 @@ const Header = () => {
       <div className="logo">
         <h2 className="logoss">
           <Link to="/">
-            <span>T</span>he
-            <span> P</span>ost
+            <div>
+              <span>T</span>he
+              <span> P</span>ost
+            </div>
           </Link>
         </h2>
       </div>
@@ -31,6 +33,9 @@ const Header = () => {
         className={showMediaIcons ? "menu-link mobile-menu-link" : "menu-link"}
       >
         <ul className="lili" onClick={() => setShowMediaIcons(false)}>
+          <li>
+            <NavLink to="/">Home</NavLink>
+          </li>
           {cookies.access_token && (
             <li>
               <NavLink to="/create">Create new post</NavLink>
@@ -61,7 +66,9 @@ const Header = () => {
             </li>
           )}
           <li>
-            <NavLink to="/contact">contact</NavLink>
+            <NavLink to="https://joinprakhar.netlify.app/" target="_blank">
+              contact
+            </NavLink>
           </li>
         </ul>
       </div>
@@ -70,9 +77,9 @@ const Header = () => {
       <div className="social-media">
         {/* hamburget menu start  */}
         <div className="hamburger-menu">
-          <a href="#" onClick={() => setShowMediaIcons(!showMediaIcons)}>
+          <Link to="#" onClick={() => setShowMediaIcons(!showMediaIcons)}>
             <GiHamburgerMenu />
-          </a>
+          </Link>
         </div>
       </div>
     </nav>

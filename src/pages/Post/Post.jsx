@@ -3,13 +3,11 @@ import { Link } from "react-router-dom";
 import styles from "./post.module.css";
 
 export default function Post({ post }) {
-  
   return (
     <div className={styles.post}>
-      {post.length > 0 && 
+      {post.length > 0 &&
         post.map((post) => {
-          const { _id, title, summary, createdAt, image, category } =
-            post;
+          const { _id, title, summary, createdAt, image, category } = post;
 
           return (
             <article className={styles.card} key={_id}>
@@ -49,8 +47,8 @@ export default function Post({ post }) {
                   className={`${styles.card__body} ${styles.card__body__back}`}
                 >
                   <div className={styles.texts}>
-                    <p className={styles.summary}>{summary}</p>
                     <Link to={`/post/${_id}`}>
+                      <p className={styles.summary}>{summary}</p>
                       <p className={styles.author}>Read More...</p>
                     </Link>
                   </div>
