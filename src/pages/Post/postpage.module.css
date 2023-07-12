@@ -89,6 +89,12 @@ svg {
 }
 
 @media screen and (max-width: 800px) {
+    .nameAuthor {
+        display: block;
+        width: 300px;
+            text-align: center;
+            margin: 0 0 0 -100px;
+        }
     .post_page{
         margin: 0 0 0 10px;
     }
