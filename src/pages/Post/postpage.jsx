@@ -67,7 +67,7 @@ export default function PostPage() {
 
 
   return (
-    <div className="post-page">
+    <div className={styles.post_page}>
       <h1>{postInfo.title}</h1>
       <article className={styles.container}>
         {loading ? (
