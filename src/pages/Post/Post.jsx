@@ -30,9 +30,9 @@ export default function Post({ post }) {
                     </Link>
                   </div>
                   <div className={styles.texts}>
-                    <Link to={`/post/${_id}`}>
+                    <a href={`/post/${_id}`}>
                       <h2 className="card_title">{title}</h2>
-                    </Link>
+                    </a>
                   </div>
                   <div className={styles.tags}>
                     <div className="info">

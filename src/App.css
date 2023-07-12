@@ -289,10 +289,10 @@ margin: 0 30px 0 10px;
 
   .mobile-menu-link {
     background-color: white;
-    height: 20rem;
+    height: 11rem;
     display: grid;
-    grid-column: 2/5;
-    align-items: center;
+    grid-column: 3/5;
+    align-items:flex-start;
     padding-left: 3rem;
     transition: all 2s linear;
     transform-origin: top;
@@ -301,7 +301,7 @@ margin: 0 30px 0 10px;
   }
 
   .mobile-menu-link ul {
-    height: 20rem;
+    height: 10rem;
     display: flex;
     justify-content: space-around;
     flex-direction: column;

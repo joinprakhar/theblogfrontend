@@ -4,9 +4,9 @@ import styles from "./Header.module.css";
 import { useCookies } from "react-cookie";
 import { GiHamburgerMenu } from "react-icons/gi";
 
-const Header = () => {
+const Header = ({show}) => {
   const [cookies, setCookies] = useCookies(["access_token"]);
-  const [showMediaIcons, setShowMediaIcons] = useState(false);
+  const [showMediaIcons, setShowMediaIcons] = useState(show);
 
   function logout() {
     setCookies("access_token", "");
@@ -30,7 +30,7 @@ const Header = () => {
       <div
         className={showMediaIcons ? "menu-link mobile-menu-link" : "menu-link"}
       >
-        <ul className="lili">
+        <ul className="lili" onClick={() => setShowMediaIcons(false)}>
           {cookies.access_token && (
             <li>
               <NavLink to="/create">Create new post</NavLink>
