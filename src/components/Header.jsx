@@ -13,18 +13,17 @@ const Header = () => {
     window.localStorage.clear();
   }
 
-//console.log(cookies?.access_token);
+  //console.log(cookies?.access_token);
   return (
     <nav className="main-nav">
       {/* 1st logo part  */}
       <div className="logo">
-        <Link to="/">
-          <h2 className="logoss">
+        <h2 className="logoss">
+          <Link to="/">
             <span>T</span>he
             <span> P</span>ost
-          </h2>
-        </Link>
-
+          </Link>
+        </h2>
       </div>
 
       {/* 2nd menu part  */}
@@ -47,13 +46,11 @@ const Header = () => {
           {cookies.access_token && (
             <li>
               <NavLink to="/" onClick={logout}>
-
                 Logout
               </NavLink>
             </li>
           )}
           {!cookies.access_token && (
-
             <li>
               <Link to="/login">Login</Link>
             </li>
