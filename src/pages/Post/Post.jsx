@@ -40,7 +40,7 @@ export default function Post({ post }) {
                     </div>
                     <div>
                       <time className={styles.date}>
-                        <a> {formatISO9075(new Date(createdAt))}</a>
+                        <> {formatISO9075(new Date(createdAt))}</>
                       </time>
                     </div>
                   </div>
