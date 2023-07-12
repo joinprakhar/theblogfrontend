@@ -34,8 +34,7 @@
     position: absolute;
     inset: 0;
     backface-visibility: hidden;
-    border-radius: 9px;
-    height: 100%;
+    border-radius: 8px;
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
 }
 
@@ -74,11 +73,10 @@
     text-align: justify;
     overflow: hidden;
     text-overflow: ellipsis;
-    height: 100%;
 }
 .texts p {
-    margin: 2px 2px;
-    font-size: 1rem;
+    margin: 2px 5px;
+    font-size: 1.5rem;
     text-align: justify;
 }
 
@@ -108,12 +106,12 @@
     background-color: #dae3e9;
     border-radius: 4px;
     padding: 0 5px;
-    font-size: 0.8rem;
+    font-size: 1rem;
 }
 
 .summary{
-    height: 280px;
-    font-size: 1rem;
+    height: 200px;
+    font-size: 1.8rem;
     overflow: hidden;
 }
 
@@ -171,9 +169,5 @@
     overflow: hidden;
     text-overflow: ellipsis;
 }
-          
-.card__body {
-    width: 115%;
-    margin: 0px -12px;
-}
+                
 }
