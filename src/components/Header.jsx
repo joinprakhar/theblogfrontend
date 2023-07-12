@@ -4,9 +4,9 @@ import styles from "./Header.module.css";
 import { useCookies } from "react-cookie";
 import { GiHamburgerMenu } from "react-icons/gi";
 
-const Header = ({show}) => {
+const Header = () => {
   const [cookies, setCookies] = useCookies(["access_token"]);
-  const [showMediaIcons, setShowMediaIcons] = useState(show);
+  const [showMediaIcons, setShowMediaIcons] = useState(false);
 
   function logout() {
     setCookies("access_token", "");

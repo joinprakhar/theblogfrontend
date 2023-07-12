@@ -3,17 +3,15 @@ import Header from './Header'
 import { Outlet } from 'react-router-dom'
 
 const Layout = () => {
-  const [showMediaIcons, setShowMediaIcons] = useState(false);
+  
 
 
 
 
   return (
     <main>
-      <Header show={showMediaIcons} />
-      <div onClick={() => setShowMediaIcons(false)}>
-        <Outlet />
-      </div>
+      <Header />
+      <Outlet />
     </main>
   );
 }
