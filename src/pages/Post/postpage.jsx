@@ -22,7 +22,8 @@ export default function PostPage() {
   useEffect(() => {
     fetch("https://blogbackend-e8fr.onrender.com/post").then((response) => {
       response.json().then((posts) => {
-        setPost(posts);
+        const post = posts.filter((e) => e._id !== id);
+        setPost(post);
       });
     });
   }, []);
@@ -37,6 +38,11 @@ export default function PostPage() {
       }
     );
   }, [id]);
+
+  console.log(posts)
+
+
+  
 
   if (!postInfo) return "";
 
@@ -80,14 +86,15 @@ export default function PostPage() {
               )}
             </div>
             <div className={styles.detailpart}>
-              <div className="author">
+              <div className={styles.nameAuthor}>
                 <Link to={`/profile/${postInfo?.author?._id}`}>
                   Author :{" "}
                   {`${postInfo?.author?.firstName} 
                 ${postInfo?.author?.lastName}`}
                 </Link>
+                <br />
+                {formatISO9075(new Date(postInfo?.createdAt))}
               </div>
-              <time>{formatISO9075(new Date(postInfo?.createdAt))}</time>
 
               {cookies?.access_token?.id === postInfo.author._id && (
                 <div className={styles.button}>
@@ -141,11 +148,13 @@ export default function PostPage() {
             </div>
           </div>
           <div className={styles.relatedPost}>
-            <p className={styles.p}>Related Post</p>
             {loading ? (
               <Loading />
             ) : (
               <div className={styles.related}>
+                <strong>Related Post</strong>
+                <hr />
+                <br />
                 <Post post={posts} />
               </div>
             )}

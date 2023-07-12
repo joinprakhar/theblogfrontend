@@ -15,8 +15,8 @@ const UserPost = ({ post}) => {
         <div className={styles.text}>
           <div className={styles.button}>
             <div className={styles.clicks}>
-              {" "}
-              Created On -{formatISO9075(new Date(createdAt))}
+              
+              {formatISO9075(new Date(createdAt))}
               <div className={styles.cli}>{category}</div>
             </div>
             <div className={styles.click}>
