@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import styles from "./RegisterPage.module.css"
+import styles from "./RegisterPage.module.css";
 import { Navigate } from "react-router-dom";
+import { useToast } from "../../context/userContext";
 
 const RegisterPage = () => {
   const [firstName, setFirstName] = useState("");
@@ -8,32 +9,36 @@ const RegisterPage = () => {
   const [password, setPassword] = useState("");
   const [checkPassword, setCheckPassword] = useState("");
   const [email, setEmail] = useState("");
-  
-const [redirect, setRedirect] = useState(false);
-  
+  const showToast = useToast();
+
+  const [redirect, setRedirect] = useState(false);
 
   async function register(e) {
     e.preventDefault();
-    
-    if (password && password === checkPassword) {
-      console.log(firstName + " " + lastName)
+    if (!password && !firstName && !lastName && !email) {
+      showToast("Please enter all Details", "error");
     } else {
-      console.log("error");
-    }
-    const response = await fetch(
-      "https://blogbackend-e8fr.onrender.com/register",
-      {
-        method: "POST",
-        body: JSON.stringify({ firstName, lastName, email, password }),
-        headers: { "Content-Type": "application/json" },
+      if (password && password === checkPassword) {
+        console.log(firstName + " " + lastName);
+      } else {
+        showToast("Password not matched", "error");
       }
-    );
+      const response = await fetch(
+        "https://blogbackend-e8fr.onrender.com/register",
+        {
+          method: "POST",
+          body: JSON.stringify({ firstName, lastName, email, password }),
+          headers: { "Content-Type": "application/json" },
+        }
+      );
 
-    if (response.status === 200) {
-      alert("Registration Success");
-      setRedirect(true);
-    } else {
-      alert("Registration Failed");
+      if (response.status === 200) {
+        showToast("Registratoin Succesfull", "success");
+        setRedirect(true);
+      } else {
+        showToast("Registration Failed", "error");
+        alert("Registration Failed");
+      }
     }
   }
 
@@ -123,4 +128,3 @@ const [redirect, setRedirect] = useState(false);
 };
 
 export default RegisterPage;
-

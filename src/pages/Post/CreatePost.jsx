@@ -3,9 +3,12 @@ import "react-quill/dist/quill.snow.css";
 import Editor from "./Editor";
 import { Navigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
+import { useToast } from "../../context/userContext";
+
 
 export default function CreatePost() {
   const [cookies, _] = useCookies(["access_token"]);
+   const showToast = useToast();
   const cat = [
     "International",
     "Education",
@@ -28,8 +31,8 @@ export default function CreatePost() {
   
 
   async function createNewPost(ev) {
-    if (!title) {
-      alert("Please select a file");
+    if (!title || !summary || !content || !type || !image) {
+      showToast("Complete all feilds", "error");
     } else {
       const data = new FormData();
       data.set("title", title);
@@ -49,6 +52,9 @@ export default function CreatePost() {
       );
       if (response.ok) {
         setRedirect(true);
+        showToast("Post Created Successfully", "success");
+      }else{
+        showToast("Failed!", "error");
       }
     }
   }
@@ -57,7 +63,7 @@ export default function CreatePost() {
     return <Navigate to={"/"} />;
   }
 
-  console.log(type)
+
   return (
     <>
       {!cookies.access_token ? (
@@ -87,7 +93,7 @@ export default function CreatePost() {
             value={image}
             onChange={(ev) => setImage(ev.target.value)}
           />
-          Category---{type}
+          Category&nbsp;&nbsp;&nbsp;{type}
           <div className="categoryChooserbox">
             {cat &&
               cat.map((value, index) => (

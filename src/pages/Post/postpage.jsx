@@ -8,7 +8,7 @@ import Loading from "../../components/loading";
 import { useCookies } from "react-cookie";
 import Comment from "./comment";
 import { deletedPost } from "../../services/Api";
-import { ToastContainer, toast } from "react-toastify";
+import { useToast } from "../../context/userContext";
 
 
 export default function PostPage() {
@@ -18,7 +18,7 @@ export default function PostPage() {
   const [redirect, setRedirect] = useState(false);
   const [loading, setShowLoading] = useState(true);
   const [posts, setPost] = useState([]);
-
+  const showToast = useToast();
   let value = [id, cookies?.access_token?.Name];
   //console.log(value)
 
@@ -55,9 +55,9 @@ export default function PostPage() {
     const response = await deletedPost(id, userid);
     if (response.ok) {
       setRedirect(true);
-      toast.success("Status Updated")
+      showToast("Post Deleted", "success");
     } else {
-      toast.error("error ")
+      showToast("Error", "error");
   }}
   if (redirect) {
     return <Navigate to={"/"} />;
@@ -159,7 +159,6 @@ export default function PostPage() {
           </div>
         </div>
       </article>
-      <ToastContainer />
     </div>
   );
 }

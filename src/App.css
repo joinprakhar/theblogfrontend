@@ -357,7 +357,7 @@ text-align: center;
       border-radius: 5px;   
       cursor: pointer;
       
-  width: 10px;
+  width: auto;
 }
 
 .categoryboxhome{

@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from "react";
 import styles from "./comment.module.css";
 import Filter from "bad-words";
+import { useToast } from "../../context/userContext";
 
 const Comment = ({ value }) => {
   const [comment, setComment] = useState("");
   const [getComment, getSetComment] = useState("");
   const data = { ...value };
   const id = data[0];
+  const showToast = useToast();
 
   async function fetchComment() {
     await fetch(`https://blogbackend-e8fr.onrender.com/comment/${id}`).then(
@@ -20,7 +22,7 @@ const Comment = ({ value }) => {
 
   async function createNewPost(ev) {
     if (!value[1]) {
-      alert("Please Sign in first");
+      showToast("Login First..!!", "error");
     } else {
       const data = new FormData();
       data.set("userid", value[1]);
@@ -39,6 +41,9 @@ const Comment = ({ value }) => {
         //console.log("commented successfully");
         setComment("");
         fetchComment();
+        showToast("Commented Succesfully!", "success");
+      }else{
+        showToast("Failed to comment", "error");
       }
     }
   }

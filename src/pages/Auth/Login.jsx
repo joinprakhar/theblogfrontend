@@ -1,17 +1,16 @@
 import React, { useContext, useState } from "react";
 import { Navigate } from "react-router-dom";
-import { UserContext } from "../../context/userContext";
 import styles from "./RegisterPage.module.css";
 import { useCookies } from "react-cookie";
 import axios from "axios";
+import { useToast } from "../../context/userContext";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [redirect, setRedirect] = useState(false);
-  const { setUserInfo } = useContext(UserContext);
   const [_, setCookies] = useCookies(["access_token"]);
-
+  const showToast = useToast();
 
     async function login(ev) {
       ev.preventDefault();
@@ -23,10 +22,11 @@ const Login = () => {
 
       setCookies("access_token", result.data);
       window.localStorage.setItem("userID", result.data.userID);
-      setUserInfo(result.data);
       setRedirect(true);
+      showToast("Loged In SuccesFull!", "success");
     } catch (error) {
       console.error(error);
+      showToast("Loged In Failed!", "error");
     }
   };
     

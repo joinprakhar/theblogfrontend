@@ -31,7 +31,7 @@ const IndexPage = () => {
     "Other",
   ];
 
-    const [searchTerm, setSearchTerm] = useState(null);
+    const [searchTerm, setSearchTerm] = useState("");
 
     
 

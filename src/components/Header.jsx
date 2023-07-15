@@ -1,16 +1,18 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, {useState } from "react";
 import { NavLink, Link } from "react-router-dom";
-import styles from "./Header.module.css";
 import { useCookies } from "react-cookie";
 import { GiHamburgerMenu } from "react-icons/gi";
+import { useToast } from "../context/userContext";
 
 const Header = () => {
+  const showToast = useToast();
   const [cookies, setCookies] = useCookies(["access_token"]);
   const [showMediaIcons, setShowMediaIcons] = useState(false);
 
   function logout() {
     setCookies("access_token", "");
     window.localStorage.clear();
+    showToast("Logedout Succesfully", "success");
   }
 
   //console.log(cookies?.access_token);

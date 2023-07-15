@@ -1,21 +1,20 @@
-import React, { Fragment, useEffect, useState } from "react";
+import React, { useState } from "react";
 import Row from "react-bootstrap/Row";
 import Card from "react-bootstrap/Card";
 import Table from "react-bootstrap/Table";
 import { NavLink, Navigate, useNavigate } from "react-router-dom";
-import { ToastContainer, toast } from "react-toastify";
+import { useToast } from "../../context/userContext";
 import "./table.css";
 import { useCookies } from "react-cookie";
 import { deletedPost } from "../../services/Api";
 
 const Tables = ({ posted }) => {
   const [post, setPost] = useState([...posted]);
-
   const navigate = useNavigate();
   const [redirect, setRedirect] = useState(false);
   const [cookies, setCookies] = useCookies(["access_token"]);
-
-  const [searchTerm, setSearchTerm] = useState(null);
+  const showToast = useToast();
+  const [searchTerm, setSearchTerm] = useState("");
 
   // Handle search term change
   const handleSearchTermChange = (event) => {
@@ -36,8 +35,6 @@ const Tables = ({ posted }) => {
     }
   };
 
-
-
   const handleSearch = (event) => {
     if (event.key === "Backspace" || event.keyCode === 8) {
       setSearchTerm(searchTerm);
@@ -46,21 +43,22 @@ const Tables = ({ posted }) => {
     }
   };
 
-
-
   const handleChange = async (id) => {
     // navigate (`/profile/${cookies.access_token.id}`)
-    // const userid = cookies?.access_token?.id;
-    // const response = deletedPost(id, userid);
-
-    console.log("handleChange");
-    // if (response.ok) {
-    //   toast.success("Status Updated");
-    //   setStatus(true);
-    // } else {
-    //   toast.error("error ");
-    // }
+    const userid = cookies?.access_token?.id;
+    console.log(userid, id);
+    const response = await deletedPost(id, userid);
+    if (response.ok) {
+      showToast("Post Deleted", "success");
+      setRedirect(true);
+    } else {
+      showToast("Error", "error");
+    }
   };
+
+  if (redirect) {
+    navigate(`/profile/${cookies?.access_token?.id}`);
+  }
 
   return (
     <>
@@ -68,7 +66,7 @@ const Tables = ({ posted }) => {
         <input
           type="text"
           value={searchTerm}
-          onChange={(event)=>handleSearchTermChange(event)}
+          onChange={(event) => handleSearchTermChange(event)}
           onKeyDown={handleSearch}
           placeholder="Search..."
         />
@@ -158,7 +156,6 @@ const Tables = ({ posted }) => {
                                     <NavLink
                                       onClick={() => {
                                         handleChange(_id);
-                                        setRedirect(true);
                                       }}
                                       style={{
                                         textDecoration: "none",
@@ -194,8 +191,6 @@ const Tables = ({ posted }) => {
             </Card>
           </section>
         </Row>
-
-        <ToastContainer />
       </div>
     </>
   );

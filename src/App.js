@@ -6,7 +6,7 @@ import Layout from "./components/Layout";
 import IndexPage from "./pages/Post/IndexPage";
 import Login from "./pages/Auth/Login";
 import RegisterPage from "./pages/Auth/RegisterPage";
-import { UserContextProvider } from "./context/userContext.jsx";
+import { ToastProvider } from "./context/userContext.jsx";
 import CreatePost from "./pages/Post/CreatePost";
 import Postpage from "./pages/Post/postpage.jsx";
 import EditPost from "./pages/Post/EditPost";
@@ -15,7 +15,7 @@ import ProfilePage from "./pages/Profile/profilePage";
 
 const App = () => {
   return (
-    <UserContextProvider>
+    <ToastProvider>
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<IndexPage />} />
@@ -27,7 +27,7 @@ const App = () => {
           <Route path="/profile/:id" element={<ProfilePage />} /> 
         </Route>
       </Routes>
-    </UserContextProvider>
+    </ToastProvider>
   );
 };
 
