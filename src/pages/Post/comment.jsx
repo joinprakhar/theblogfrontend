@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 import styles from "./comment.module.css";
+import Filter from "bad-words";
 
 const Comment = ({ value }) => {
   const [comment, setComment] = useState("");
   const [getComment, getSetComment] = useState("");
-  const data = {...value}
+  const data = { ...value };
   const id = data[0];
-  //console.log(id)
+
   async function fetchComment() {
     await fetch(`https://blogbackend-e8fr.onrender.com/comment/${id}`).then(
       (response) => {
@@ -19,7 +20,7 @@ const Comment = ({ value }) => {
 
   async function createNewPost(ev) {
     if (!value[1]) {
-      alert("Please select a file");
+      alert("Please Sign in first");
     } else {
       const data = new FormData();
       data.set("userid", value[1]);
@@ -46,6 +47,25 @@ const Comment = ({ value }) => {
     fetchComment();
   }, []);
 
+  const handleInputChange = (event) => {
+    const input = event.target.value;
+    const inputValue = input.toString()
+    if (inputValue !== "" ) {
+      console.log(inputValue);
+      const filter = new Filter();
+      try {
+        filter.addWords("example", "badword"); // Add any custom words to the filter
+        const filteredText = filter.clean(inputValue);
+        setComment(filteredText);
+      } catch (error) {
+        setComment("");
+      }
+    } else {
+      setComment("");
+    }
+    
+  };
+
   return (
     <div>
       <h3>Add new Comment</h3>
@@ -60,20 +80,18 @@ const Comment = ({ value }) => {
         </div>
         <div className={styles.comment}>
           {value[1] ? `${value[1]}` : "Sign In to Comment"}
-          <input
-            type="text"
-            value={comment}
-            onChange={(e) => setComment(e.target.value)}
-          />
-          <button>Post your Comment</button>
+          <input type="text" value={comment} onChange={handleInputChange} />
+          <button disabled={value[1] ? false : true}>
+            Post your Comment
+          </button>
         </div>
       </form>
       <h3>Comments</h3>
       {getComment
         ? getComment.map((data) => {
-            const { userid, comment } = data;
+            const { userid, comment, _id } = data;
             return (
-              <div className={styles.container}>
+              <div className={styles.container} key={_id}>
                 <div className={styles.image}>
                   <img
                     className={styles.images}
@@ -95,4 +113,4 @@ const Comment = ({ value }) => {
 
 export default Comment; 
 
-//{cookies ? `${cookies.access_token.Name}` : "Sign In to Comment"}
+

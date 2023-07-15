@@ -5,7 +5,6 @@ import { UserContext } from "../../context/userContext";
 import { useCookies } from "react-cookie";
 
 export default function EditPost() {
-  const { userInfo } = useContext(UserContext);
   const [cookies, _] = useCookies(["access_token"]);
   const { id } = useParams();
   const [title, setTitle] = useState("");

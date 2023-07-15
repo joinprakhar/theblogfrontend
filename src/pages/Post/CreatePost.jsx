@@ -6,13 +6,26 @@ import { useCookies } from "react-cookie";
 
 export default function CreatePost() {
   const [cookies, _] = useCookies(["access_token"]);
-
+  const cat = [
+    "International",
+    "Education",
+    "Politics",
+    "Economy",
+    "Buisness",
+    "Fashion",
+    "Entertainment",
+    "Sport",
+    "Technology",
+    "Other",
+  ];
   const [title, setTitle] = useState("");
   const [summary, setSummary] = useState("");
   const [content, setContent] = useState("");
   const [image, setImage] = useState("");
   const [type, setType] = useState("");
   const [redirect, setRedirect] = useState(false);
+
+  
 
   async function createNewPost(ev) {
     if (!title) {
@@ -44,6 +57,7 @@ export default function CreatePost() {
     return <Navigate to={"/"} />;
   }
 
+  console.log(type)
   return (
     <>
       {!cookies.access_token ? (
@@ -73,13 +87,20 @@ export default function CreatePost() {
             value={image}
             onChange={(ev) => setImage(ev.target.value)}
           />
-          Category
-          <input
-            type="text"
-            placeholder={"Category"}
-            value={type}
-            onChange={(ev) => setType(ev.target.value)}
-          />
+          Category---{type}
+          <div className="categoryChooserbox">
+            {cat &&
+              cat.map((value, index) => (
+                <div
+                  className="categoryChooser"
+                  value={value}
+                  onClick={() => setType(value)}
+                  key={index}
+                >
+                  {value}
+                </div>
+              ))}
+          </div>
           Content
           <Editor value={content} onChange={setContent} />
           <button style={{ marginTop: "5px" }}>Create post</button>

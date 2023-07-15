@@ -7,6 +7,9 @@ import Post from "./Post";
 import Loading from "../../components/loading";
 import { useCookies } from "react-cookie";
 import Comment from "./comment";
+import { deletedPost } from "../../services/Api";
+import { ToastContainer, toast } from "react-toastify";
+
 
 export default function PostPage() {
   const [cookies, _] = useCookies(["access_token"]);
@@ -39,7 +42,7 @@ export default function PostPage() {
     );
   }, [id]);
 
-  console.log(posts)
+
 
 
   
@@ -48,19 +51,14 @@ export default function PostPage() {
 
   async function deletePost(ev) {
     ev.preventDefault();
-    const data = new FormData();
-    data.set("id", id);
-    data.set("userId", cookies?.access_token?.id);
-
-    const response = await fetch(`https://blogbackend-e8fr.onrender.com/post`, {
-      method: "DELETE",
-      body: data,
-      credentials: "include",
-    });
+    const userid = cookies?.access_token?.id;
+    const response = await deletedPost(id, userid);
     if (response.ok) {
       setRedirect(true);
-    }
-  }
+      toast.success("Status Updated")
+    } else {
+      toast.error("error ")
+  }}
   if (redirect) {
     return <Navigate to={"/"} />;
   }
@@ -161,6 +159,7 @@ export default function PostPage() {
           </div>
         </div>
       </article>
+      <ToastContainer />
     </div>
   );
 }

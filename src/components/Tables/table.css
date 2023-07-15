@@ -1,0 +1,27 @@
+.containertable{
+    width: 98%;
+    margin: 0 auto;
+    box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .15) !important;
+    
+}
+
+.table_height_adjust{
+    display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+}
+
+@media screen and (max-width: 850px){
+
+
+.containertable {
+        overflow-x: auto;
+        width: 90vw;
+        margin: 0 auto;
+        box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .15) !important;
+        font-size: .70rem;
+
+    }
+}

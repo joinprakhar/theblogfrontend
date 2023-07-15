@@ -1,4 +1,5 @@
 import React from "react";
+import 'bootstrap/dist/css/bootstrap.min.css';
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
 import Layout from "./components/Layout";
@@ -10,6 +11,7 @@ import CreatePost from "./pages/Post/CreatePost";
 import Postpage from "./pages/Post/postpage.jsx";
 import EditPost from "./pages/Post/EditPost";
 import ProfilePage from "./pages/Profile/profilePage";
+
 
 const App = () => {
   return (

@@ -1,7 +1,7 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./profilePage.module.css";
 import { useParams } from "react-router-dom";
-import UserPost from "./userPost";
+import Tables from "../../components/Tables/Tables";
 
 const ProfilePage = () => {
   const { id } = useParams();
@@ -24,35 +24,21 @@ const count = postInfo?.length
 
   if (!postInfo) return "";
 
-  const info = userInfo?.info;
-
   return (
     <div className={styles.container}>
       <div className={styles.info}>
-        <img
-          src="https://w1.pngwing.com/pngs/743/500/png-transparent-circle-silhouette-logo-user-user-profile-green-facial-expression-nose-cartoon.png"
-          alt=""
-          className={styles.pic}
-        ></img>
-        <div>
+        <div className={styles.profile_detail}>
           <p className={styles.name}>
             {`${userInfo?.firstName}
             ${userInfo?.lastName}`}
           </p>
-          <p>Web Developer</p>
-          <p>{info?.email}</p>
+          <p>{userInfo?.email}</p>
           <p>Total Post : {count} </p>
         </div>
       </div>
-      {postInfo.length > 0 &&
-        postInfo.map((post) => {
-          return (
-            <div key={post?._id}>
-              <UserPost post={post} id={userInfo?._id} />
-            </div>
-          );
-        })}
-      <div className={styles.content}></div>
+      <div className={styles.tablecontent}>
+        <Tables posted={postInfo} info={userInfo} />
+      </div>
     </div>
   );
 };
